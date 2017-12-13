@@ -9,7 +9,7 @@ int main(void) {
   zmq_bind(receiver, "tcp://*:5558");
 
   // Socket for worker control
-  void *controller = zmq_socket("context, ZMQ_PUB");
+  void *controller = zmq_socket(context, ZMQ_PUB);
   zmq_bind(controller, "tcp://*:5559");
 
   // Wait for start of batch
@@ -39,5 +39,9 @@ int main(void) {
   // Send Kill signal to workers
   s_send(controller, "KILL");
 
+  zmq_close(receiver);
+  zmq_close(controller);
+  zmq_ctx_destroy(context);
+  
   return 0;
 }

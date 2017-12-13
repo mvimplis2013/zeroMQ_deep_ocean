@@ -21,7 +21,7 @@ int main(void) {
   // The first message is "0" and signals start of batch
   s_send(sink, "0");
 
-  // Initialize random number generatoR
+  // Initialize random number generator
   srandom((unsigned) time(NULL));
 
   // Send 100 tasks
@@ -29,6 +29,7 @@ int main(void) {
   int total_msec = 0;
   for (task_nbr=0; task_nbr<100; task_nbr++) {
     int workload;
+
     // Random workload from 1 to 100msecs
     workload = randof(100) + 1;
     total_msec += workload;
